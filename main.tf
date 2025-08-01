@@ -13,7 +13,7 @@ provider "azurerm" {
 
 # Use existing resource group
 data "azurerm_resource_group" "rg" {
-  name = "storagerg"
+  name = var.resource_group_name
 }
 
 resource "azurerm_virtual_network" "vnet" {
