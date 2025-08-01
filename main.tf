@@ -19,7 +19,7 @@ data "azurerm_resource_group" "rg" {
 resource "azurerm_virtual_network" "vnet" {
   name                = "vmVnet"
   address_space       = ["10.0.0.0/16"]
-  location            = data.azurerm_resource_group.rg.location
+  location            = var.location
   resource_group_name = data.azurerm_resource_group.rg.name
 }
 
@@ -32,7 +32,7 @@ resource "azurerm_subnet" "subnet" {
 
 resource "azurerm_network_interface" "nic" {
   name                = "vmNIC"
-  location            = data.azurerm_resource_group.rg.location
+  location            = var.location
   resource_group_name = data.azurerm_resource_group.rg.name
 
   ip_configuration {
@@ -45,7 +45,7 @@ resource "azurerm_network_interface" "nic" {
 resource "azurerm_windows_virtual_machine" "vm" {
   name                  = "myvm"
   resource_group_name   = data.azurerm_resource_group.rg.name
-  location              = data.azurerm_resource_group.rg.location
+  location              = var.location
   size                  = "Standard_B1s"
   admin_username        = var.admin_username
   admin_password        = var.admin_password
